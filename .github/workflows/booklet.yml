@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install pdf tools
-        uses: awalsh128/cache-apt-pkgs-action@latest
+        uses: daaku/gh-action-apt-install@v4
         with:
           packages: mupdf-tools texlive-extra-utils texlive-latex-recommended texlive-latex-base
 
