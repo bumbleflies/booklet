@@ -25,9 +25,6 @@ jobs:
         with:
           packages: mupdf-tools texlive-extra-utils texlive-latex-recommended texlive-latex-base
 
-      - name: Reconfigure packages
-        run: sudo apt install -y texlive-latex-recommended
-
       - name: Run a multi-line script
         run: |
           ./create_from_canva.sh "$SOURCE_PDF" "$TARGET_PDF"
