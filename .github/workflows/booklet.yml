@@ -31,7 +31,7 @@ jobs:
 
       - name: 👟 Run transformation
         run: |
-          mkdir -f -p $OUT_PATH
+          mkdir -p $OUT_PATH
           ./create_from_canva.sh "$SOURCE_PDF" "$OUT_PATH/$TARGET_PDF"
           echo Add other actions to build,
           echo test, and deploy your project.
