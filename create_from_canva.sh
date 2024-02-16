@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 infile="$1"
 outfile="$2"
