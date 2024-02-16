@@ -39,9 +39,3 @@ jobs:
         with:
           name: booklet-transformed
           path: ${{ env.TARGET_PDF }}
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            ${{ env.TARGET_PDF }}
