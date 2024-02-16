@@ -11,6 +11,7 @@ on:
 env:
   SOURCE_PDF: Open Space Booklet.pdf
   TARGET_PDF: Open Space Booklet-transformed.pdf
+  OUT_PATH: out
 
 jobs:
   build:
@@ -30,7 +31,8 @@ jobs:
 
       - name: 👟 Run transformation
         run: |
-          ./create_from_canva.sh "$SOURCE_PDF" "$TARGET_PDF"
+          mkdir -f -p $OUT_PATH
+          ./create_from_canva.sh "$SOURCE_PDF" "$OUT_PATH/$TARGET_PDF"
           echo Add other actions to build,
           echo test, and deploy your project.
 
@@ -38,14 +40,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: booklet-transformed
-          path: ${{ env.TARGET_PDF }}
+          path: ${{ env.OUT_PATH }}
 
       - name: 🎉 Push to stable branch
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
           BRANCH: release
-          FOLDER: ${{ env.TARGET_PDF }}
+          FOLDER: ${{ env.OUT_PATH }}
           # https://github.com/ad-m/github-push-action/issues/96
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ({sha}) {msg}" # The commit message
