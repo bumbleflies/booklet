@@ -23,7 +23,7 @@ jobs:
       - name: Install pdf tools
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: mupdf-tools texlive-extra-utils texlive-latex-recommended
+          packages: mupdf-tools texlive-extra-utils texlive-latex-recommended texlive-latex-base
 
       - name: Reconfigure packages
         run: sudo apt install -y texlive-latex-recommended
