@@ -23,7 +23,7 @@ jobs:
 
       - name: Run a multi-line script
         run: |
-          ./create_from_canva.sh Open\ Space\ Booklet.pdf out.pdf
+          ./create_from_canva.sh Open\ Space\ Booklet.pdf Open\ Space\ Booklet-transformed.pdf
           echo Add other actions to build,
           echo test, and deploy your project.
 
@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: booklet-transformed
-          path: out.pdf
+          path: Open\ Space\ Booklet-transformed.pdf
