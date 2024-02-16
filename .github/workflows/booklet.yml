@@ -8,6 +8,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  SOURCE_PDF: Open\ Space\ Booklet.pdf
+  TARGET_PDF: Open\ Space\ Booklet-transformed.pdf
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +30,7 @@ jobs:
 
       - name: Run a multi-line script
         run: |
-          ./create_from_canva.sh Open\ Space\ Booklet.pdf Open\ Space\ Booklet-transformed.pdf
+          ./create_from_canva.sh "$SOURCE_PDF" "$TARGET_PDF"
           echo Add other actions to build,
           echo test, and deploy your project.
 
@@ -34,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: booklet-transformed
-          path: Open\ Space\ Booklet-transformed.pdf
+          path: "$TARGET_PDF"
