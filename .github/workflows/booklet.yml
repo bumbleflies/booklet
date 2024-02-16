@@ -26,3 +26,9 @@ jobs:
           ./create_from_canva.sh Open\ Space\ Booklet.pdf out.pdf
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Store final Booklet
+        uses: actions/upload-artifact@v4
+        with:
+          name: booklet-transformed
+          path: out.pdf
