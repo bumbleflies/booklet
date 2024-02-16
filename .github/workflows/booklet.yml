@@ -19,7 +19,7 @@ jobs:
       - name: Install pdf tools
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: mupdf-tools texlive-extra-utils
+          packages: mupdf-tools texlive-extra-utils texlive-latex-recommended
 
       - name: Run a multi-line script
         run: |
