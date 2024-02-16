@@ -20,22 +20,32 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Install pdf tools
+      - name: 🏗️ Install pdf tools
         uses: daaku/gh-action-apt-install@v4
         with:
           packages: mupdf-tools texlive-extra-utils texlive-latex-recommended texlive-latex-base
 
-      - name: Reconfigure packages
+      - name: 🧰 Reconfigure packages
         run: sudo apt install -y texlive-latex-recommended
 
-      - name: Run a multi-line script
+      - name: 👟 Run transformation
         run: |
           ./create_from_canva.sh "$SOURCE_PDF" "$TARGET_PDF"
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Store final Booklet
+      - name: 🖴 Store final Booklet
         uses: actions/upload-artifact@v4
         with:
           name: booklet-transformed
           path: ${{ env.TARGET_PDF }}
+
+      - name: 🎉 Push to stable branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: release
+          FOLDER: ${{ env.TARGET_PDF }}
+          # https://github.com/ad-m/github-push-action/issues/96
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
