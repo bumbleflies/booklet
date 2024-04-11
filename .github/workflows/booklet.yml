@@ -9,8 +9,8 @@ on:
     branches: [ "master" ]
 
 env:
-  SOURCE_PDF: Open Space Booklet.pdf
-  TARGET_PDF: Open Space Booklet-transformed.pdf
+  SOURCE_PDF: booklet_no_bleed.pdf
+  TARGET_PDF: booklet_home_print.pdf
   OUT_PATH: out
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
       - name: 👟 Run transformation
         run: |
           mkdir -p $OUT_PATH
-          ./create_from_canva.sh "$SOURCE_PDF" "$OUT_PATH/$TARGET_PDF"
+          ./canva_to_home_print.sh "$SOURCE_PDF" "$OUT_PATH/$TARGET_PDF"
           echo Add other actions to build,
           echo test, and deploy your project.
 
