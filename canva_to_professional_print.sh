@@ -3,8 +3,21 @@
 infile="$1"
 outfile="$2"
 
-temp_file="$1-single.pdf"
+tempfile=$(mktemp --suffix=.pdf)
+left_pages=$(mktemp --suffix=.pdf)
+right_pages=$(mktemp --suffix=.pdf)
 
-mutool poster -x 2 "$infile" "$temp_file"
+echo -n "extracting left pages..."
+pdfcrop --margins "0 0 -420 0" $infile $tempfile > /dev/null
+pdfcrop --margins "-18" $tempfile $left_pages > /dev/null
+echo "done."
 
-pdfjam --papersize '{154mm,154mm}' "$temp_file" 1-3,28,27,4-5,26,25,6-7,24,23,8-9,22,21,10-11,20,19,12-13,18,17,14-15,16 -o "$outfile"
+echo -n "extracting right pages..."
+pdfcrop --margins "-420 0 0 0" $infile $tempfile > /dev/null
+pdfcrop --margins "-18" $tempfile $right_pages > /dev/null
+echo "done."
+
+echo -n "assembling final booklet..."
+pdfjam --papersize '{154mm,154mm}' $left_pages $right_pages -o $tempfile > /dev/null 2>&1
+pdfjam --papersize '{154mm,154mm}' $tempfile '15,2,16,3,17,4,18,5,19,6,20,7,21,8,22,9,23,10,24,11,25,12,26,13,27,14,28,1' -o $outfile > /dev/null 2>&1
+echo "done."

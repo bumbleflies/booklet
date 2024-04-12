@@ -9,8 +9,10 @@ on:
     branches: [ "master" ]
 
 env:
-  SOURCE_PDF: booklet_no_bleed.pdf
-  TARGET_PDF: booklet_home_print.pdf
+  H_SOURCE_PDF: booklet_no_bleed.pdf
+  H_TARGET_PDF: booklet_home_print.pdf
+  P_SOURCE_PDF: booklet_with_bleed.pdf
+  P_TARGET_PDF: booklet_professional_print.pdf
   OUT_PATH: out
 
 jobs:
@@ -29,17 +31,19 @@ jobs:
       - name: 🧰 Reconfigure packages
         run: sudo apt install -y texlive-latex-recommended
 
-      - name: 👟 Run transformation
+      - name: 👟 Create home print booklet
         run: |
           mkdir -p $OUT_PATH
-          ./canva_to_home_print.sh "$SOURCE_PDF" "$OUT_PATH/$TARGET_PDF"
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          ./canva_to_home_print.sh "$H_SOURCE_PDF" "$OUT_PATH/$H_TARGET_PDF"
+
+      - name: 👟 Create professional print booklet
+        run: |
+          ./canva_to_professional_print.sh "$P_SOURCE_PDF" "$OUT_PATH/$P_TARGET_PDF"
 
       - name: 🖴 Store final Booklet
         uses: actions/upload-artifact@v4
         with:
-          name: booklet-transformed
+          name: booklet-pdfs
           path: ${{ env.OUT_PATH }}
 
       - name: 🎉 Push to stable branch
