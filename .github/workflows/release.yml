@@ -20,5 +20,5 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: $P_TARGET_PDF
+          files: ${{ env.P_TARGET_PDF }}
           generate_release_notes: true
