@@ -23,7 +23,7 @@ pdfcrop --margins "-9.37200000000002 -9.18350000000002 -428.995 -9.1835000000000
 echo "done."
 
 echo -n "extracting right pages..."
-pdfcrop --margins "-428.995 -9.18350000000002 -9.37200000000002 -9.18350000000002" $infile $right_pages > /dev/null
+pdfcrop --margins   " -429.862 -9.18350000000002 -8.505 -9.18350000000002" $infile $right_pages > /dev/null
 echo "done."
 
 echo -n "assembling final booklet..."
