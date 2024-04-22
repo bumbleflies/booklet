@@ -19,13 +19,11 @@ left_pages=$(mktemp --suffix=.pdf)
 right_pages=$(mktemp --suffix=.pdf)
 
 echo -n "extracting left pages..."
-pdfcrop --margins "0 0 -420 0" $infile $tempfile > /dev/null
-pdfcrop --margins "-9" $tempfile $left_pages > /dev/null
+pdfcrop --margins "-9.37200000000002 -9.18350000000002 -428.995 -9.18350000000002" $infile $tempfile > /dev/null
 echo "done."
 
 echo -n "extracting right pages..."
-pdfcrop --margins "-420 0 0 0" $infile $tempfile > /dev/null
-pdfcrop --margins "-9" $tempfile $right_pages > /dev/null
+pdfcrop --margins "-428.995 -9.18350000000002 -9.37200000000002 -9.18350000000002" $infile $tempfile > /dev/null
 echo "done."
 
 echo -n "assembling final booklet..."
